@@ -51,11 +51,19 @@ st.markdown("### 💬 Ask a question (voice or type)")
 display = st.empty()
 user_input = st.chat_input("Ask about profit, fixes...")
 
-if st.button("🎤 Speak"):
-    result = speech_to_text(lang_code)
-    if result:
-        st.success(f"You said: {result}")
-        user_input = result
+import os
+
+IS_CLOUD = os.environ.get("STREAMLIT_SERVER_HEADLESS", None) == "1"
+
+if not IS_CLOUD:
+    if st.button("🎤 Speak"):
+        result = speech_to_text(lang_code)
+        if result:
+            st.success(f"You said: {result}")
+            user_input = result
+else:
+    st.info("🎙️ Voice input is not supported on Streamlit Cloud. Please use the chat input below.")
+
 
 # Process user query
 if user_input:
