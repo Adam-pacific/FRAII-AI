@@ -1,16 +1,18 @@
+import os
 import speech_recognition as sr
 from gtts import gTTS
 import tempfile
-import os
 
-def speech_to_text(lang='en'):
+def speech_to_text(lang_code='en'):
+    # Skip voice on Streamlit Cloud
+    if os.environ.get("STREAMLIT_SERVER_HEADLESS", "") == "1":
+        return "Voice input not supported on Streamlit Cloud."
+
     try:
-        lang_map = {'en': 'en-US', 'ta': 'ta-IN', 'hi': 'hi-IN'}
         r = sr.Recognizer()
         with sr.Microphone() as source:
             audio = r.listen(source, timeout=5)
-            text = r.recognize_google(audio, language=lang_map.get(lang, 'en-US'))
-            return text
+            return r.recognize_google(audio, language=lang_code)
     except Exception as e:
         return f"Error: {e}"
 
