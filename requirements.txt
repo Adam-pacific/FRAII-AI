@@ -1,0 +1,13 @@
+streamlit
+pandas
+numpy
+matplotlib
+seaborn
+gtts
+speechrecognition
+scikit-learn
+openpyxl
+langdetect
+selenium
+plotly
+deep-translator

@@ -1,7 +1,0 @@
-streamlit==1.35.0
-pandas
-langdetect
-gTTS
-SpeechRecognition==3.10.0
-selenium
-openpyxl
