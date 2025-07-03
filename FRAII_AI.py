@@ -1,3 +1,5 @@
+# FRAII_AI — Multilingual Voice AI Assistant with Self-Healing
+
 import streamlit as st
 import pandas as pd
 from utils.voice import speech_to_text, text_to_speech
@@ -6,19 +8,29 @@ from utils.memory import init_memory, log_event, show_memory
 from utils.agent import auto_fill_form
 from langdetect import detect
 
-st.set_page_config(page_title="FRAII AI",page_icon="🏔️", layout="wide")
+st.set_page_config(page_title="FRAII AI", page_icon="🏔️", layout="wide")
 st.title("🤖 FRAII AI — Self-Healing + Voice + Automation")
 
 init_memory()
 
-# Upload CSV or Excel
-uploaded = st.file_uploader("📂 Upload CSV or Excel", type=["csv", "xlsx"])
+# Upload CSV or Excel + Language Selector (right side of uploader)
+col1, col2 = st.columns([4, 1])
+with col1:
+    uploaded = st.file_uploader("📂 Upload CSV or Excel", type=["csv", "xlsx"])
+with col2:
+    selected_lang = st.selectbox(
+        "🌐 Language",
+        options=["English", "Tamil", "Hindi"],
+        index=0
+    )
+
+lang_code = {"English": "en", "Tamil": "ta", "Hindi": "hi"}[selected_lang]
+
 if uploaded and 'df' not in st.session_state:
     if uploaded.name.endswith(".csv"):
         df = pd.read_csv(uploaded)
     elif uploaded.name.endswith(".xlsx"):
         df = pd.read_excel(uploaded)
-
     st.session_state.df = df
     log_event("uploads", uploaded.name)
 
@@ -39,31 +51,37 @@ st.markdown("### 💬 Ask a question (voice or type)")
 display = st.empty()
 user_input = st.chat_input("Ask about profit, fixes...")
 
-if st.button("🎙️ Speak"):
-    result = speech_to_text()
+if st.button("🎤 Speak"):
+    result = speech_to_text(lang_code)
     if result:
         st.success(f"You said: {result}")
         user_input = result
 
+# Process user query
 if user_input:
     log_event("queries", user_input)
     st.session_state.chat_history.append({"role": "user", "content": user_input})
-    lang = detect(user_input)
 
-    if "profit" in user_input.lower() or "லாபம்" in user_input or "मुनाफा" in user_input:
-        reply = "Your profit is good. Keep increasing your margins!"
-    elif "fix" in user_input.lower():
-        reply = "Missing values are already fixed."
-    elif "file" in user_input.lower():
+    lower_input = user_input.lower()
+    if any(k in lower_input for k in ["profit", "laabam", "munafa", "லாபம்", "मुनाफा"]):
+        if "laabam" in lower_input or "லாபம்" in lower_input:
+            reply = "இன்று விற்பனை லாபகரமாக இருக்கிறது. இன்னும் அதிக வருமானத்திற்காக வாடிக்கையாளர் தொடர்புகளை மேம்படுத்துங்கள்."
+        elif "munafa" in lower_input or "मुनाफा" in lower_input:
+            reply = "आज का मुनाफा स्थिर है। अधिक लाभ के लिए विपणन रणनीतियों में सुधार करें।"
+        else:
+            reply = "Profit looks stable. Consider maximizing during seasonal demand."
+    elif "fix" in lower_input:
+        reply = "I've already patched missing values."
+    elif "file" in lower_input:
         reply = f"You uploaded: {', '.join(st.session_state.memory['uploads'])}"
-    elif "automate" in user_input.lower():
+    elif "automate" in lower_input:
         reply = auto_fill_form()
     else:
-        reply = "Try asking about profit, fixes, or file uploads."
+        reply = "Try asking about profit, fixes, uploads, or automation."
 
     st.session_state.chat_history.append({"role": "assistant", "content": reply})
     st.markdown(f"**🤖 AI**: {reply}")
-    st.audio(text_to_speech(reply, lang), format='audio/mp3')
+    st.audio(text_to_speech(reply, lang=lang_code), format='audio/mp3')
 
-if st.checkbox("🧠 Show Memory"):
+if st.checkbox("📜 Show Memory"):
     show_memory()
