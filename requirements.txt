@@ -1,13 +1,7 @@
 streamlit
 pandas
-numpy
-matplotlib
-seaborn
-gtts
-speechrecognition
-scikit-learn
 openpyxl
+gTTS
 langdetect
+deep_translator
 selenium
-plotly
-deep-translator
