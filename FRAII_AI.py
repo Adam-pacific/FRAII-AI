@@ -9,6 +9,8 @@ from utils.agent import auto_fill_form
 from langdetect import detect
 from utils.email_bot import send_report_email
 from utils.news_scraper import get_ai_news
+from utils.gpt_summary import summarize_dataframe
+
 
 with st.expander("📧 Email Automation"):
     email = st.text_input("Recipient Email")
@@ -59,6 +61,12 @@ if 'df' in st.session_state:
             st.session_state.df = df
             log_event("fixes", f"Fixed {col}")
             st.rerun()
+
+if st.button("🧠 Summarize Data with GPT"):
+    summary = summarize_dataframe(df)
+    st.subheader("📊 GPT Summary")
+    st.write(summary)
+
 
 # Ask queries
 st.markdown("### 💬 Ask a question (voice or type)")
