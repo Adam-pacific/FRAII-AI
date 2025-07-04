@@ -66,6 +66,7 @@ if 'df' in st.session_state:
 if st.button("🧠 Summarize Data with GPT"):
    summary = summarize_text("Summarize the dataset insights")
    st.markdown(f"**GPT Summary:** {summary}")
+   st.write(summary)
 
 
 
