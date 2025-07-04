@@ -13,6 +13,7 @@ from utils.summary import generate_summary
 
 
 
+st.write("✅ Streamlit is working fine.")
 
 with st.expander("📧 Email Automation"):
     email = st.text_input("Recipient Email")
