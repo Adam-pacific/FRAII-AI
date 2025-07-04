@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 def send_report_email(recipient, subject, message):
     try:
         sender_email = "adamahamed953@gmail.com"
-        app_password = "mnsnygxshkmrrqew"  # 16 chars, no spaces
+        app_password = "mnsn ygxs hkmr rqew"  # 16 chars, no spaces
 
         msg = MIMEText(message)
         msg["Subject"] = subject
