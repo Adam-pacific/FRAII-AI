@@ -64,6 +64,17 @@ if 'df' in st.session_state:
             log_event("fixes", f"Fixed {col}")
             st.rerun()
 
+
+def generate_summary(df):
+    # Simple manual summary logic
+    st.subheader("📊 Dataset Summary")
+    st.write("Number of rows:", df.shape[0])
+    st.write("Number of columns:", df.shape[1])
+    st.write("Null values per column:")
+    st.write(df.isnull().sum())
+    st.write("Basic statistics:")
+    st.write(df.describe())
+
 st.markdown("### 📄 Summary of Uploaded Data")
 generate_summary(df)
 
