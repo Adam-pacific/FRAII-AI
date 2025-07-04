@@ -5,7 +5,7 @@
 🚀 Live Demo: [Click Here to Try FRAII AI](https://adam-pacific-fraii-ai-fraii-ai-kp5tjr.streamlit.app/)  
 📁 GitHub: [github.com/Adam-pacific/FRAII-AI](https://github.com/Adam-pacific/FRAII-AI)
 
----
+--
 
 ## 💡 Overview
 
