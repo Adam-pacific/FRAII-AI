@@ -68,9 +68,11 @@ if 'df' in st.session_state:
 
 
 
+if 'df' in st.session_state:
+    df = st.session_state.df
+    st.markdown("### 📄 Summary of Uploaded Data")
+    generate_summary(df)
 
-st.markdown("### 📄 Summary of Uploaded Data")
-generate_summary(df)
 
 
 
