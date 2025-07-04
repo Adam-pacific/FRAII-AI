@@ -7,6 +7,20 @@ from utils.healer import analyze_and_heal, apply_fix
 from utils.memory import init_memory, log_event, show_memory
 from utils.agent import auto_fill_form
 from langdetect import detect
+from utils.email_bot import send_report_email
+from utils.news_scraper import get_ai_news
+
+with st.expander("📧 Email Automation"):
+    email = st.text_input("Recipient Email")
+    msg = st.text_area("Message")
+    if st.button("Send Email"):
+        response = send_report_email(email, "FRAII AI Report", msg)
+        st.success(response)
+
+with st.expander("📰 Latest AI News"):
+    news = get_ai_news()
+    for item in news:
+        st.markdown(f"- {item}")
 
 st.set_page_config(page_title="FRAII AI", page_icon="🏔️", layout="wide")
 st.title("🤖 FRAII AI — Self-Healing + Voice + Automation")
