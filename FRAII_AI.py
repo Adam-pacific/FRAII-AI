@@ -9,7 +9,8 @@ from utils.agent import auto_fill_form
 from langdetect import detect
 from utils.email_bot import send_report_email
 from utils.news_scraper import get_ai_news
-from utils.gpt_summary import summarize_text
+from utils.summary import generate_summary
+
 
 
 
@@ -63,10 +64,9 @@ if 'df' in st.session_state:
             log_event("fixes", f"Fixed {col}")
             st.rerun()
 
-if st.button("🧠 Summarize Data with GPT"):
-   summary = summarize_text("Summarize the dataset insights")
-   st.markdown(f"**GPT Summary:** {summary}")
-   st.write(summary)
+st.markdown("### 📄 Summary of Uploaded Data")
+generate_summary(df)
+
 
 
 
