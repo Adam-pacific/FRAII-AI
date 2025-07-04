@@ -21,7 +21,6 @@ if 'chat_history' not in st.session_state:
 
 # 📧 Email Automation Panel
 with st.expander("📧 Email Automation"):
-    st.image("assets/email_banner.png", width=400)  # Path to your image
     email = st.text_input("Recipient Email")
     msg = st.text_area("Message")
     file_to_attach = st.file_uploader("Optional: Attach a file", type=["pdf", "csv", "xlsx", "txt"])
