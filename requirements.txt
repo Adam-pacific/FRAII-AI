@@ -5,7 +5,5 @@ gTTS
 langdetect
 deep_translator
 selenium
-smtplib
-email
 beautifulsoup4
 requests
