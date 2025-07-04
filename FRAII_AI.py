@@ -9,6 +9,7 @@ from utils.agent import auto_fill_form
 from langdetect import detect
 from utils.email_bot import send_report_email
 from utils.news_scraper import get_ai_news
+from utils.summary import generate_summary
 
 
 
@@ -67,7 +68,7 @@ if 'df' in st.session_state:
 
 
 
-from utils.summary import generate_summary
+
 st.markdown("### 📄 Summary of Uploaded Data")
 generate_summary(df)
 
