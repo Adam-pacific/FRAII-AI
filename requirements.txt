@@ -7,4 +7,5 @@ deep_translator
 selenium
 beautifulsoup4
 requests
-openai>=1.0.0
+matplotlib
+seaborn
