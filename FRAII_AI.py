@@ -23,9 +23,19 @@ if 'chat_history' not in st.session_state:
 with st.expander("📧 Email Automation"):
     email = st.text_input("Recipient Email")
     msg = st.text_area("Message")
+    file_to_attach = st.file_uploader("Optional: Attach a file", type=["pdf", "csv", "xlsx", "txt"])
+
     if st.button("Send Email"):
-        response = send_report_email(email, "FRAII AI Report", msg)
+        if file_to_attach:
+            with open(file_to_attach.name, "wb") as f:
+                f.write(file_to_attach.read())
+            response = send_report_email(email, "FRAII AI Report", msg, file_to_attach.name)
+            os.remove(file_to_attach.name)  # Clean up after sending
+        else:
+            response = send_report_email(email, "FRAII AI Report", msg)
+
         st.success(response)
+
 
 # 📰 Latest AI News Panel
 with st.expander("📰 Latest AI News"):
