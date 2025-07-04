@@ -2,7 +2,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def send_report_email(receiver, subject, message, sender="your_email@gmail.com", password="your_app_password"):
+def send_report_email(receiver, subject, message, sender="k66199550@gmail.com", password="gahw cqxr mdvg xxzv"):
     try:
         msg = MIMEMultipart()
         msg['From'] = sender
