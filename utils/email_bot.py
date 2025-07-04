@@ -1,22 +1,22 @@
 import smtplib
 from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
-def send_report_email(receiver, subject, message, sender="adamahamed953@gmail.com", password="mnsn ygxs hkmr rqew"):
+def send_report_email(recipient, subject, message):
     try:
-        msg = MIMEMultipart()
-        msg['From'] = sender
-        msg['To'] = receiver
-        msg['Subject'] = subject
+        sender_email = "adamahamed953@gmail.com"
+        app_password = "mnsn ygxs hkmr rqew"  # 16 chars, no spaces
 
-        msg.attach(MIMEText(message, 'plain'))
+        msg = MIMEText(message)
+        msg["Subject"] = subject
+        msg["From"] = sender_email
+        msg["To"] = recipient
 
-        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
-        server.login(sender, password)
-        text = msg.as_string()
-        server.sendmail(sender, receiver, text)
+        server.login(sender_email, app_password)
+        server.sendmail(sender_email, recipient, msg.as_string())
         server.quit()
-        return "✅ Email sent!"
+
+        return "✅ Email sent successfully!"
     except Exception as e:
         return f"❌ Email failed: {e}"
