@@ -1,6 +1,7 @@
 # FRAII_AI — Multilingual Voice AI Assistant with Self-Healing
 
 import streamlit as st
+st.write("✅ Streamlit is working fine.")
 import pandas as pd
 from utils.voice import speech_to_text, text_to_speech
 from utils.healer import analyze_and_heal, apply_fix
@@ -13,7 +14,7 @@ from utils.summary import generate_summary
 
 
 
-st.write("✅ Streamlit is working fine.")
+
 
 with st.expander("📧 Email Automation"):
     email = st.text_input("Recipient Email")
