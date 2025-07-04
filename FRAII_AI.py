@@ -9,7 +9,8 @@ from utils.agent import auto_fill_form
 from langdetect import detect
 from utils.email_bot import send_report_email
 from utils.news_scraper import get_ai_news
-from utils.gpt_summary import summarize_dataframe
+from utils.gpt_summary import summarize_text
+
 
 
 with st.expander("📧 Email Automation"):
@@ -63,9 +64,9 @@ if 'df' in st.session_state:
             st.rerun()
 
 if st.button("🧠 Summarize Data with GPT"):
-    summary = summarize_dataframe(df)
-    st.subheader("📊 GPT Summary")
-    st.write(summary)
+   summary = summarize_text("Summarize the dataset insights")
+   st.markdown(f"**GPT Summary:** {summary}")
+
 
 
 # Ask queries
