@@ -1,7 +1,6 @@
 # FRAII_AI — Multilingual Voice AI Assistant with Self-Healing
 
 import streamlit as st
-st.write("✅ Streamlit is working fine.")
 import pandas as pd
 from utils.voice import speech_to_text, text_to_speech
 from utils.healer import analyze_and_heal, apply_fix
@@ -10,7 +9,7 @@ from utils.agent import auto_fill_form
 from langdetect import detect
 from utils.email_bot import send_report_email
 from utils.news_scraper import get_ai_news
-from utils.summary import generate_summary
+
 
 
 
@@ -68,7 +67,7 @@ if 'df' in st.session_state:
 
 
 
-
+from utils.summary import generate_summary
 st.markdown("### 📄 Summary of Uploaded Data")
 generate_summary(df)
 
