@@ -5,8 +5,8 @@ import os
 def send_report_email(receiver_email, subject, message, file_path=None):
     try:
         # Your Gmail credentials
-        sender_email = "your_email@gmail.com"
-        app_password = "your_16_char_app_password"
+        sender_email = "yadamahamed953@gmail.com"
+        app_password = "mnsn ygxs hkmr rqew"
 
         # Create email
         msg = EmailMessage()
